@@ -2,8 +2,11 @@
 
 # This script is displaying "Best School" 10 times
 
-count=0
-while [ $count -lt 10 ]; do
-    echo "Best School"
-    count=$((count + 1))
+index=0
+
+while [ $index -lt 10 ]
+do
+  echo "Best School"
+  ((index++))
 done
+
