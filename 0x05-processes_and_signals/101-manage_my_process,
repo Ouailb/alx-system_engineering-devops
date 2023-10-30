@@ -1,1 +1,2 @@
 #!/usr/bin/env bash
+pkill -f 100-process_and_pid_file
