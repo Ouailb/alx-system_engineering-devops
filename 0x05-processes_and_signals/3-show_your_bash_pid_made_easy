@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Get the list of directories in /proc that represent processes
+pgrep -l bash
