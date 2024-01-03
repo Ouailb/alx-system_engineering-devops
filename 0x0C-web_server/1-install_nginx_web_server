@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Update package list and install nginx
+apt-get update
+apt-get install -y nginx
+
+# Start nginx
+service nginx start
+
+# Configure nginx to listen on port 80 and return "Hello World!" for GET requests to /
+echo "Hello World!" > /var/www/html/index.html
+
+# Reload nginx configuration
+service nginx reload
