@@ -6,14 +6,14 @@ apt-get install haproxy -y
 
 # edit config file
 echo "
-   listen 430875-lb-01
+   listen 455194-lb-01
    bind *:80
    mode http
    balance roundrobin
    option httpclose
    option forwardfor
-   server 430875-web-01     18.209.224.89:80 check
-   server 430875-web-02 	34.227.90.0:80 check
+   server 455194-web-01     100.26.171.178:80 check
+   server 455194-web-02 	52.91.135.187:80 check
 " | tee -a /etc/haproxy/haproxy.cfg
 echo "ENABLED=1" |  tee -a /etc/default/haproxy
 service haproxy start
