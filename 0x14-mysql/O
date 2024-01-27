@@ -1,0 +1,73 @@
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B7B3B788A8D3785C
+
+sudo sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
+
+sudo apt-get update
+
+sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+
+//////
+projectcorrection280hbtn
+
+//////
+
+task1 : create user with grant op
+CREATE USER 'holberton_user '@'localhost' IDENTIFIED WITH mysql_native_password BY 'projectcorrection280hbtn';
+GRANT REPLICATION CLIENT ON *.* TO 'holberton_user'@'localhost';
+FLUSH PRIVILEGES;
+//////
+
+
+task2:  Create database in Master server:
+CREATE DATABASE tyrell_corp;
+USE tyrell_corp;
+CREATE TABLE nexus6 (
+   id int PRIMARY KEY,
+   name varchar(20)
+   );
+
+
+
+
+
+////:::
+
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+log-error       = /var/log/mysql/error.log
+# By default we only accept connections from localhost
+bind-address    = 0.0.0.0
+server-id = 1
+log_bin = /var/log/mysql/mysql-bin.log
+max_binlog_size = 500M
+slow_query_log = 1
+binlog_do_db = tyrell_corp
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+
+
+
+
+
+
+
+mysql> CHANGE MASTER TO
+   MASTER_HOST='100.26.171.178',
+   MASTER_USER='replica_user',
+   MASTER_PASSWORD='123',
+   MASTER_LOG_FILE='mysql-bin.000001',
+   MASTER_LOG_POS=154;
+
+
+
+Or from MySQL 8.0.23:
+mysql> CHANGE REPLICATION SOURCE TO
+    ->     SOURCE_HOST='source_host_name',
+    ->     SOURCE_USER='replication_user_name',
+    ->     SOURCE_PASSWORD='replication_password',
+    ->     SOURCE_LOG_FILE='recorded_log_file_name',
+    ->     SOURCE_LOG_POS=recorded_log_position;
+

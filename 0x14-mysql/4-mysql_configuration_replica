@@ -1,0 +1,3 @@
+server-id = 2
+relay_log = /var/log/mysql/mysql-relay-bin.log
+replicate-do-db = tyrell_corp
