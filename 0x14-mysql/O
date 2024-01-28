@@ -26,6 +26,7 @@ CREATE TABLE nexus6 (
    name varchar(20)
    );
 
+cat content_1 | sudo mysql -uroot tyrell_corp
 
 
 
@@ -51,7 +52,7 @@ symbolic-links=0
 
 
 
-
+telnet 100.26.171.178  3306
 
 
 mysql> CHANGE MASTER TO
@@ -59,7 +60,7 @@ mysql> CHANGE MASTER TO
    MASTER_USER='replica_user',
    MASTER_PASSWORD='123',
    MASTER_LOG_FILE='mysql-bin.000001',
-   MASTER_LOG_POS=154;
+   MASTER_LOG_POS=431;
 
 
 
