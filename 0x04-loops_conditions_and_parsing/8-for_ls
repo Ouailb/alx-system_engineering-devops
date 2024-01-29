@@ -12,3 +12,19 @@ for file in *; do
         echo "$name"
     fi
 done
+
+#----------------------
+
+
+list=$(ls)
+for i in $list; do
+  echo "$i" | cut -d '-' -f2
+done
+
+#-----------------
+
+command=$(ls)
+for dir in $command
+do
+    echo "$dir" | cut -d '-' -f2
+done

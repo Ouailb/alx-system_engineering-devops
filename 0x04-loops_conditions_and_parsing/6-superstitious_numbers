@@ -28,3 +28,46 @@ do
 
     count=$((count + 1))
 done
+
+
+#-------------
+
+
+count=1
+bad_luck_iterations=(4 9 17)
+
+while [ $count -le 20 ]; do
+    for i in "${bad_luck_iterations[@]}"; do
+        if [ $count -eq $i ]; then
+            echo $count
+            case $i in
+                4) echo "bad luck from China";;
+                9) echo "bad luck from Japan";;
+                17) echo "bad luck from Italy";;
+            esac
+            break
+        fi
+    done
+
+    if [ $count -ne $i ]; then
+        echo $count
+    fi
+
+    count=$((count + 1))
+done
+
+#---------------
+
+count=1
+
+while [ $count -le 20 ]
+do
+  echo "$count"
+  case $count in
+    "4") echo "bad luck from China";;
+    "9") echo "bad luck from Japan";;
+    "17") echo "bad luck from Italy";;
+  esac
+  (( count++ ))
+done
+

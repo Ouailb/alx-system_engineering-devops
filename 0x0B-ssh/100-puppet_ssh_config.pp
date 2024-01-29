@@ -1,3 +1,4 @@
+# client config file
 # Setting up my client config file
 include stdlib
 
