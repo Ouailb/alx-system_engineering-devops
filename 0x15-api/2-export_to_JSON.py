@@ -1,19 +1,28 @@
 #!/usr/bin/python3
-"""Exports to-do list information for a given employee ID to JSON format."""
+"""
+Get all data for a specific user ID
+"""
 import json
 import requests
-import sys
+from sys import argv
+
+def get_user_data(user_id):
+    user_info = requests.get(
+        f"https://jsonplaceholder.typicode.com/users/{user_id}").json()
+    tasks = requests.get(
+        f"https://jsonplaceholder.typicode.com/todos?userId={user_id}").json()
+
+    user_data = {
+        "user_id": user_id,
+        "username": user_info.get("username"),
+        "tasks": tasks
+    }
+
+    return user_data
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(user_id)).json()
-    username = user.get("username")
-    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+    user_id = argv[1]
+    user_data = get_user_data(user_id)
 
-    with open("{}.json".format(user_id), "w") as jsonfile:
-        json.dump({user_id: [{
-                "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": username
-            } for t in todos]}, jsonfile)
+    with open(f"{user_id}_all_data.json", "w", encoding='utf-8') as jsonfile:
+        json.dump(user_data, jsonfile, ensure_ascii=False, indent=4)
