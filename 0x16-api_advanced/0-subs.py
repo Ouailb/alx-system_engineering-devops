@@ -4,7 +4,7 @@ import requests
 
 def number_of_subscribers(subreddit):
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {"User-Agent": "Custom User Agent"}  
+    headers = {"User-Agent": "Custom User Agent"}
 
     try:
         response = requests.get(url, headers=headers)
@@ -22,4 +22,3 @@ def number_of_subscribers(subreddit):
     except Exception as e:
         print(f"An error occurred: {e}")
         return 0
-
