@@ -14,7 +14,8 @@ def number_of_subscribers(subreddit):
         subreddit (str): The name of the subreddit.
 
     Returns:
-        int: The number of subscribers, or 0 if the subreddit is not found or an error occurs.
+        int: The number of subscribers, or 0 if the subreddit
+        is not found or an error occurs.
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {"User-Agent": "Custom User Agent"}
@@ -35,14 +36,3 @@ def number_of_subscribers(subreddit):
     except Exception as e:
         print(f"An error occurred: {e}")
         return 0
-'''
-if __name__ == "__main__":
-    import sys
-
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        subreddit = sys.argv[1]
-        subscribers = number_of_subscribers(subreddit)
-        print(f"{subscribers}")
-'''
