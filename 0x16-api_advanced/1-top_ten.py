@@ -1,19 +1,31 @@
 #!/usr/bin/python3
-"""
-this doc for module
-"""
-import requests
+""" returns the top ten posts """
 
-headers = {"User-Agent": "MyCustomUserAgent/1.0"}
+
+import requests
 
 
 def top_ten(subreddit):
-    """method doc"""
-    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    response = requests.get(url, allow_redirects=False, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        for post in data["data"]["children"]:
-            print(post["data"]["title"])
+    """ function that queries the Reddit API and
+    prints the titles of the first 10
+    hot posts listed for a given subreddit """
+    if type(subreddit) is not str or subreddit is None:
+        print("None")
+        return None
+    apiurl = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    header = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/aboubakrtaibi)"
+        }
+    res = requests.get(apiurl, headers=header, allow_redirects=False)
+    if res.status_code == 200:
+
+        print(res)
+        data = res.json()
+        if 'data' in data and 'children' in data['data']:
+            posts = data['data']['children']
+            for _, post in enumerate(posts[:10], start=1):
+                title = post['data']['title']
+                print(title)
     else:
         print("None")
+        return 1
