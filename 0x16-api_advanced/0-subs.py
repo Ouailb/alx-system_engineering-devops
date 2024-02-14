@@ -1,22 +1,19 @@
 #!/usr/bin/python3
-"""
-this doc for module
-"""
+""" returns the number of subscribers """
 import requests
-
-header = {
-    "User-Agent": "MyCustomUserAgent/1.0"
-}
 
 
 def number_of_subscribers(subreddit):
-    """method doc"""
-    try:
-        url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-        response = requests.get(url, allow_redirects=False, headers=header)
-        if response.status_code == 200:
-            data = response.json()
-            return data["data"]["subscribers"]
+    """ function that queries the Reddit API and
+    returns the number of subscribers """
+    if type(subreddit) is not str or subreddit is None:
         return 0
-    except Exception:
+    apiurl = f"https://www.reddit.com/r/{subreddit}/about.json"
+    header = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+        }
+    res = requests.get(apiurl, headers=header, allow_redirects=False)
+    if res.status_code == 404:
         return 0
+    num_subscribers = res.json().get("data").get("subscribers")
+    return num_subscribers
